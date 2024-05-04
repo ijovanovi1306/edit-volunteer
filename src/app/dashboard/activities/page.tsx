@@ -9,11 +9,15 @@ import AddActivityDialog from "@/app/components/AddActivityDialog";
 import { Button, Box } from "@mui/material";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddVolunteerDialog from "@/app/components/AddVolunteerDialog";
+import { Activity } from "@/app/lib/definitions";
 
 const ActivitiesPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const activities = useAppSelector((state) => state.activities.activities);
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     dispatch(fetchActivities());
@@ -26,6 +30,17 @@ const ActivitiesPage: React.FC = () => {
     dispatch(deleteActivity(activityId));
   };
 
+  const handleOpenDialog = (activityId: string) => {
+    const selected = activities.find(activity => activity.id === activityId);
+    setSelectedActivity(selected || null);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setSelectedActivity(null);
+    setOpenDialog(false);
+  };
+
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 100 },
     { field: "name", headerName: "Name", width: 200 },
@@ -33,11 +48,12 @@ const ActivitiesPage: React.FC = () => {
     { field: "location", headerName: "Location", width: 150 },
     { field: "description", headerName: "Description", width: 250 },
     {
-      field: "actions",
+      field: "action1",
       headerName: "Actions",
       sortable: false,
       width: 100,
       renderCell: (params) =>
+        
         isAdmin && (
           <Button
             variant="contained"
@@ -46,7 +62,22 @@ const ActivitiesPage: React.FC = () => {
           >
             <DeleteIcon />
           </Button>
+          
         ),
+    },
+    {
+      field: "action2",
+      headerName: "Actions",
+      sortable: false,
+      width: 100,
+      renderCell: (params) =>
+        
+        <Button
+          variant="outlined"
+          onClick={() => handleOpenDialog(params.row.id as string)}
+        >
+          Edit
+        </Button>
     },
   ];
 
@@ -65,6 +96,7 @@ const ActivitiesPage: React.FC = () => {
         pageSizeOptions={[5]}
         checkboxSelection={false}
       />
+      <AddVolunteerDialog open={openDialog} onClose={handleCloseDialog} activity={selectedActivity} /> 
     </div>
   );
 };

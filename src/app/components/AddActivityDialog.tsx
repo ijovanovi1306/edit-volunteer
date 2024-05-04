@@ -21,6 +21,7 @@ const AddActivityDialog: React.FC<{ open: boolean; onClose: () => void }> = ({
     date: "",
     location: "",
     description: "",
+    volunteers: [],
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +41,7 @@ const AddActivityDialog: React.FC<{ open: boolean; onClose: () => void }> = ({
       date: "",
       location: "",
       description: "",
+      volunteers: [],
     });
     onClose();
   };

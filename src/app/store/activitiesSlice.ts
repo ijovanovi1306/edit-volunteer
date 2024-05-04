@@ -56,6 +56,40 @@ export const deleteActivity = createAsyncThunk(
   }
 );
 
+// Thunk for updating activity details
+export const updateActivityDetails = createAsyncThunk(
+  "activities/updateActivityDetails",
+  async (updatedActivity: Activity) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/activities/${updatedActivity.id}`,
+        updatedActivity
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Failed to update activity details:", error);
+      throw error;
+    }
+  }
+);
+
+// Thunk for updating volunteers for an activity
+export const updateActivityVolunteers = createAsyncThunk(
+  "activities/updateActivityVolunteers",
+  async ({ activityId, updatedActivity }: { activityId: string, updatedActivity: Activity }) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/activities/${activityId}`,
+        updatedActivity
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Failed to update activity volunteers:", error);
+      throw error;
+    }
+  }
+);
+
 const activitiesSlice = createSlice({
   name: "activities",
   initialState,
@@ -106,6 +140,41 @@ const activitiesSlice = createSlice({
       .addCase(deleteActivity.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Failed to delete activity";
+      })
+      // Add cases for updating activity details
+      .addCase(updateActivityDetails.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(
+        updateActivityDetails.fulfilled,
+        (state, action: PayloadAction<Activity>) => {
+          state.status = "succeeded";
+          state.activities = state.activities.map(activity =>
+            activity.id === action.payload.id ? action.payload : activity
+          );
+        }
+      )
+      .addCase(updateActivityDetails.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Failed to update activity details";
+      })
+      // Add cases for updating activity volunteers
+      .addCase(updateActivityVolunteers.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(
+        updateActivityVolunteers.fulfilled,
+        (state, action: PayloadAction<{ activityId: string, volunteers: string[] }>) => {
+          state.status = "succeeded";
+          const { activityId, volunteers } = action.payload;
+          state.activities = state.activities.map(activity =>
+            activity.id === activityId ? { ...activity, volunteers } : activity
+          );
+        }
+      )
+      .addCase(updateActivityVolunteers.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Failed to update activity volunteers";
       });
   },
 });
