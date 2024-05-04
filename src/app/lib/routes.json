@@ -1,0 +1,5 @@
+{
+    "/activities/:id": {
+      "DELETE": "/activities/:id"
+    }
+  }

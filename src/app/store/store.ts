@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import userReducer from "./userSlice";
+import activitiesReducer from "./activitiesSlice";
 
 export const store = configureStore({
-  reducer: { user: userReducer },
+  reducer: { user: userReducer, activities: activitiesReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });
