@@ -45,7 +45,7 @@ export const postActivity = createAsyncThunk(
 
 export const deleteActivity = createAsyncThunk(
   "activities/deleteActivity",
-  async (activityId: number | null) => {
+  async (activityId: string) => {
     try {
       await axios.delete(`http://localhost:3001/activities/${activityId}`);
       return activityId;
@@ -95,14 +95,12 @@ const activitiesSlice = createSlice({
       })
       .addCase(
         deleteActivity.fulfilled,
-        (state, action: PayloadAction<number | null>) => {
+        (state, action: PayloadAction<string>) => {
           const deletedId = action.payload;
-          if (deletedId !== null) {
-            state.status = "succeeded";
-            state.activities = state.activities.filter(
-              (activity) => activity.id !== deletedId
-            );
-          }
+          state.status = "succeeded";
+          state.activities = state.activities.filter(
+            (activity) => activity.id !== deletedId
+          );
         }
       )
       .addCase(deleteActivity.rejected, (state, action) => {

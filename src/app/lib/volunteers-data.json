@@ -1,77 +1,70 @@
 {
   "activities": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Activity 1",
       "date": "01.01.2025",
       "location": "City1",
       "description": "Short description 1",
       "volunteers": [
-        1,
-        2
+        "1",
+        "2"
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Activity 2",
       "date": "02.02.2025",
       "location": "City2",
       "description": "Short description 2",
       "volunteers": [
-        2,
-        3
+        "2",
+        "3"
       ]
-    },
-    {
-      "id": 3,
-      "name": "sdadasda",
-      "date": "1231",
-      "location": "sadasd",
-      "description": "123123"
     }
   ],
   "volunteers": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Volunteer1",
       "city": "City1",
       "activities": [
-        1
+        "1"
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Volunteer2",
       "city": "City2",
       "activities": [
-        1,
-        2
+        "1",
+        "2"
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Volunteer3",
       "city": "City3",
       "activities": [
-        3
+        "3"
       ]
     }
   ],
   "associations": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Association1",
       "city": "City1",
       "activities": [
-        1
+        "1"
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Association2",
       "city": "City2",
       "activities": [
-        2
+        "2"
       ]
     }
   ]

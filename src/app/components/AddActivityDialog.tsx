@@ -1,32 +1,46 @@
-import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { useAppDispatch } from '../store/store';
-import { postActivity } from '../store/activitiesSlice';
+import React, { useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import { useAppDispatch } from "../store/store";
+import { postActivity } from "../store/activitiesSlice";
 
-const AddActivityDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
+const AddActivityDialog: React.FC<{ open: boolean; onClose: () => void }> = ({
+  open,
+  onClose,
+}) => {
   const dispatch = useAppDispatch();
   const [activity, setActivity] = useState({
-    id: 0,
-    name: '',
-    date: '',
-    location: '',
-    description: '',
+    id: "",
+    name: "",
+    date: "",
+    location: "",
+    description: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-  
-    // Convert id string to number
-    const parsedValue = name === 'id' ? parseInt(value) : value;
-  
+
     setActivity((prevActivity) => ({
       ...prevActivity,
-      [name]: parsedValue,
+      [name]: value,
     }));
   };
 
   const handleAddActivity = () => {
     dispatch(postActivity(activity));
+    setActivity({
+      id: "",
+      name: "",
+      date: "",
+      location: "",
+      description: "",
+    });
     onClose();
   };
 
@@ -34,7 +48,7 @@ const AddActivityDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ o
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add New Activity</DialogTitle>
       <DialogContent>
-      <TextField
+        <TextField
           autoFocus
           margin="dense"
           label="ID"
