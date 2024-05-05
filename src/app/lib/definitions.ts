@@ -21,3 +21,10 @@ export interface Activity {
     city:  string;
     activities: string[];
   }
+
+  export interface Request {
+    id: string;
+    name: string;
+    city: string;
+    activities: string[];
+  }

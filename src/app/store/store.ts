@@ -4,6 +4,7 @@ import userReducer from "./userSlice";
 import activitiesReducer from "./activitiesSlice";
 import volunteersReducer from "./volunteersSlice";
 import associationsReducer from "./associationsSlice";
+import requestsReducer from "./requestsSlice";
 
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     activities: activitiesReducer,
     volunteers: volunteersReducer,
     associations: associationsReducer,
+    requests: requestsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

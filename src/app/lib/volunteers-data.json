@@ -70,5 +70,23 @@
         "2"
       ]
     }
+  ],
+  "requests": [
+    {
+      "id": "3",
+      "name": "Association3",
+      "city": "City1",
+      "activities": [
+        "1"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Association4",
+      "city": "City2",
+      "activities": [
+        "2"
+      ]
+    }
   ]
 }
