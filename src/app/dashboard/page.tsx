@@ -23,7 +23,7 @@ const DashboardUserSlider: React.FC = () => {
         minWidth: "300px",
         display: "flex",
         flexDirection: "column",
-        alignItems: 'center',
+        alignItems: "center",
         margin: "auto",
       }}
     >
@@ -44,6 +44,21 @@ const DashboardUserSlider: React.FC = () => {
         min={0}
         max={1}
       />
+
+      <Typography
+        sx={{
+          backgroundColor: "#ffefb5",
+          color: "#7c5b01",
+          border: "1px solid #f9d770",
+          borderRadius: "5px",
+          padding: "10px",
+          marginTop: "20px",
+        }}
+        gutterBottom
+      >
+        Please do not forget to host src/app/lib/volunteers-data.json with
+        json-server since data is there.
+      </Typography>
     </div>
   );
 };
