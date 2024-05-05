@@ -13,29 +13,29 @@ const UserProfileCard: React.FC = () => {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "20px",
-        marginBottom: '20px',
+        marginBottom: "20px",
         width: "400px",
         minWidth: "400px",
       }}
     >
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
-          Ivan Jovanovic
+          Ivan Jovanović
         </Typography>
         <Typography variant="body1" color="textSecondary" gutterBottom>
-          Nedavno diplomirao na PMFST, prijavljen na EDIT Junior React Dev zbog
-          interesa u razvoj web i mobilnih aplikacija i stjecanja novih
-          vjestina.
+          Nedavno diplomirao na PMFST, prijavio sam se na EDIT Junior React Dev
+          zbog interesa u razvoj web i mobilnih aplikacija, stjecanja novih
+          vještina i učenja novih tehnologija.
         </Typography>
         <Typography variant="body1" color="textSecondary" gutterBottom>
-          Nazalost, zbog zauzetosti poslom i osobnom situacijom nisam bio u
-          mogucnosti posvetiti se ovome projektu onoliko koliko sam se nadao,
-          dapace gotovo i nikako, s time da sam bio i u grupi koja je kasnila
-          tjedan dana... Unatoc svemu tome sam gledao barem poraditi na
-          funkcionalnosti, s naglaskom na CRUD metode jer s time do prije mjesec
-          dana i nisam imao nekog doticaja. Sve u svemu, ja se ispricavam i
-          nadam se da sam donekle uspio zadovoljiti minimalne uvjete ovog
-          projekta.
+          Nažalost, zbog zauzetosti poslom i osobnom situacijom nisam bio u
+          mogućnosti posvetiti se ovome projektu onoliko koliko sam se nadao,
+          dapače gotovo i nikako, s time da sam bio i u grupi koja je kasnila
+          tjedan dana... Unatoč svemu tome sam gledao barem ostvariti osnovne
+          funkcionalnosti u projektu i nauciti koristiti bolje CRUD metode, jer
+          s time do prije otprilike mjesec dana i nisam imao nekog doticaja. Sve
+          u svemu, ja se ispričavam na nedostatku uređivanja izgleda, i nadam se
+          da sam donekle uspio zadovoljiti minimalne uvjete ovog projekta.
         </Typography>
         <Link
           href="https://github.com/ijovanovi1306"
