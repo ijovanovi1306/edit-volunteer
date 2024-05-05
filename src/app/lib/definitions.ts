@@ -10,11 +10,12 @@ export interface Activity {
   export interface Volunteer {
     id: string;
     name: string;
+    contact: string;
     city: string;
     activities: string[];
   }
 
-  export interface Associations {
+  export interface Association {
     id: string;
     name: string;
     city:  string;

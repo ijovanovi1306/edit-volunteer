@@ -9,7 +9,7 @@ import AddActivityDialog from "@/app/components/AddActivityDialog";
 import { Button, Box } from "@mui/material";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddVolunteerDialog from "@/app/components/AddVolunteerDialog";
+import AddActivityVolunteerDialog from "@/app/components/AddActivityVolunteerDialog";
 import { Activity } from "@/app/lib/definitions";
 
 const ActivitiesPage: React.FC = () => {
@@ -96,7 +96,7 @@ const ActivitiesPage: React.FC = () => {
         pageSizeOptions={[5]}
         checkboxSelection={false}
       />
-      <AddVolunteerDialog open={openDialog} onClose={handleCloseDialog} activity={selectedActivity} /> 
+      <AddActivityVolunteerDialog open={openDialog} onClose={handleCloseDialog} activity={selectedActivity} /> 
     </div>
   );
 };

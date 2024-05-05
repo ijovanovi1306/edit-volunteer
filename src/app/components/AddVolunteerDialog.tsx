@@ -6,94 +6,122 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-  Card,
-  CardContent,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../store/store";
-import { updateActivityVolunteers } from "../store/activitiesSlice";
-import { Activity, Volunteer } from "../lib/definitions";
+import { useAppDispatch } from "../store/store";
+import { postVolunteer } from "../store/volunteersSlice";
 
-const AddVolunteerDialog: React.FC<{
-  open: boolean;
-  onClose: () => void;
-  activity: any;
-}> = ({ open, onClose, activity }) => {
+const AddVolunteerDialog: React.FC<{ open: boolean; onClose: () => void }> = ({
+  open,
+  onClose,
+}) => {
   const dispatch = useAppDispatch();
-  const [newVolunteer, setNewVolunteer] = useState("");
+  const [volunteer, setVolunteer] = useState({
+    id: "",
+    name: "",
+    contact: "",
+    city: "",
+    activities: [] as string[],
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setVolunteer((prevVolunteer) => ({
+      ...prevVolunteer,
+      [name]: value,
+    }));
+  };
+
+  const handleActivityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const isChecked = volunteer.activities.includes(value);
+
+    if (isChecked) {
+      setVolunteer((prevVolunteer) => ({
+        ...prevVolunteer,
+        activities: prevVolunteer.activities.filter((activity) => activity !== value),
+      }));
+    } else {
+      setVolunteer((prevVolunteer) => ({
+        ...prevVolunteer,
+        activities: [...prevVolunteer.activities, value],
+      }));
+    }
+  };
 
   const handleAddVolunteer = () => {
-    const updatedActivity: Activity = {
-      ...activity,
-      volunteers: [...activity.volunteers, newVolunteer],
-    };
-    dispatch(
-      updateActivityVolunteers({ activityId: activity.id, updatedActivity })
-    ); // Dispatch action to update volunteers
-    setNewVolunteer(""); // Clear the input field
+    dispatch(postVolunteer(volunteer));
+    setVolunteer({
+      id: "",
+      name: "",
+      contact: "",
+      city: "",
+      activities: [],
+    });
+    onClose();
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit Activity</DialogTitle>
+      <DialogTitle>Add New Volunteer</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
           label="ID"
           name="id"
-          value={activity?.id || ""}
+          value={volunteer.id}
+          onChange={handleChange}
           fullWidth
-          disabled
         />
         <TextField
+          autoFocus
           margin="dense"
           label="Name"
           name="name"
-          value={activity?.name || ""}
+          value={volunteer.name}
+          onChange={handleChange}
           fullWidth
-          disabled
         />
         <TextField
           margin="dense"
-          label="Date"
-          name="date"
-          value={activity?.date || ""}
+          label="Contact"
+          name="contact"
+          value={volunteer.contact}
+          onChange={handleChange}
           fullWidth
-          disabled
         />
         <TextField
           margin="dense"
-          label="Location"
-          name="location"
-          value={activity?.location || ""}
-          fullWidth
-          disabled
-        />
-        <TextField
-          margin="dense"
-          label="Description"
-          name="description"
-          value={activity?.description || ""}
-          fullWidth
-          disabled
-        />
-        <TextField
-          margin="dense"
-          label="New Volunteer"
-          name="newVolunteer"
-          value={newVolunteer}
-          onChange={(e) => setNewVolunteer(e.target.value)}
+          label="City"
+          name="city"
+          value={volunteer.city}
+          onChange={handleChange}
           fullWidth
         />
-        <Button onClick={handleAddVolunteer}>Add Volunteer</Button>
-        <Card>
-          <CardContent>
-            {/* Display already added volunteers */}
-            {activity?.volunteers.map((volunteer: Volunteer) => (
-              <div key={volunteer.id}>{volunteer.name}</div>
+        <FormControl>
+          <FormGroup>
+            <DialogTitle>Activities</DialogTitle>
+            {["Activity1", "Activity2", "Activity3"].map((activity) => (
+              <FormControlLabel
+                key={activity}
+                control={
+                  <Checkbox
+                    checked={volunteer.activities.includes(activity)}
+                    onChange={handleActivityChange}
+                    name={activity}
+                    value={activity}
+                  />
+                }
+                label={activity}
+              />
             ))}
-          </CardContent>
-        </Card>
+          </FormGroup>
+        </FormControl>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>

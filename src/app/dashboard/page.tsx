@@ -23,6 +23,7 @@ const DashboardUserSlider: React.FC = () => {
         minWidth: "300px",
         display: "flex",
         flexDirection: "column",
+        alignItems: 'center',
         margin: "auto",
       }}
     >

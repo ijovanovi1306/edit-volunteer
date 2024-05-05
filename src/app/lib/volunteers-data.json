@@ -27,6 +27,7 @@
     {
       "id": "1",
       "name": "Volunteer1",
+      "contact": "Contact1",
       "city": "City1",
       "activities": [
         "1"
@@ -35,6 +36,7 @@
     {
       "id": "2",
       "name": "Volunteer2",
+      "contact": "Contact2",
       "city": "City2",
       "activities": [
         "1",
@@ -44,6 +46,7 @@
     {
       "id": "3",
       "name": "Volunteer3",
+      "contact": "Contact3",
       "city": "City3",
       "activities": [
         "3"
